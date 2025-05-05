@@ -1,0 +1,288 @@
+.home-container {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+
+/* Top Bar */
+.top-bar {
+  background-color: white;
+  padding: 10px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-section img {
+  height: 40px;
+}
+
+.logo-text {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.ask-question-btn {
+  background: #ff8000;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.ask-question-btn:hover {
+  background: #e67300;
+}
+
+.notification-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.notification-btn img {
+  height: 24px;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.user-profile img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.dropdown-arrow {
+  margin-left: 5px;
+  font-size: 12px;
+  color: #666;
+}
+
+/* Main Content */
+.main-content {
+  display: flex;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 260px;
+  background: #ffffff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #eee;
+  min-height: 100vh;
+}
+
+.sidebar-search-container {
+  margin-bottom: 20px;
+}
+
+.sidebar-search {
+  width: 90%;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.sidebar-section {
+  margin-bottom: 30px;
+}
+
+.sidebar-title {
+  font-size: 12px;
+  color: #999;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.sidebar-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-item {
+  font-size: 15px;
+  color: #333;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+
+.sidebar-item:hover {
+  background: #fff3e0;
+  color: #ff8000;
+}
+
+.sidebar-item.active {
+  background: #ff8000;
+  color: white;
+}
+
+.sidebar-social {
+  margin-top: auto;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.sidebar-social img {
+  height: 24px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.sidebar-social img:hover {
+  transform: scale(1.1);
+}
+
+/* Feed */
+.discussion-feed {
+  flex: 1;
+  padding: 30px;
+}
+
+.tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+}
+
+.tab {
+  background: white;
+  color: #555;
+  border: 1px solid #ddd;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tab:hover {
+  background-color: #fff3e0;
+  border-color: #ff8000;
+  color: #ff8000;
+}
+
+.tab.active {
+  background-color: #ff8000;
+  color: white;
+  border-color: #ff8000;
+}
+
+
+.post {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.post-user-info {
+  flex: 1;
+  margin-left: 10px;
+}
+
+.username {
+  font-weight: bold;
+  display: block;
+}
+
+.post-time {
+  font-size: 12px;
+  color: gray;
+}
+
+.post-menu {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.post-content h4 {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.tags span {
+  background-color: #f0f0f0;
+  color: #555;
+  padding: 4px 8px;
+  border-radius: 12px;
+  margin-right: 5px;
+  font-size: 12px;
+}
+
+.post-actions {
+  margin-top: 15px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.action-btn {
+  background: none;
+  border: none;
+  font-size: 14px;
+  color: #666;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.action-btn:hover {
+  color: #ff8000;
+}
+
+.action-btn img {
+  height: 18px;
+}

@@ -1,0 +1,79 @@
+.auth-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom, #ff4500, #ff6347);
+    padding: 1rem;
+  }
+  
+  .auth-box {
+    background-color: white;
+    border-radius: 20px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 360px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+  }
+  
+  .logo img {
+    width: 60px;
+    margin-bottom: 1rem;
+  }
+  
+  h2 {
+    margin-bottom: 1rem;
+    font-weight: bold;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    gap: 15px;
+  }
+  
+  input {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    width: 100%;  /* Ensures the inputs are the same width */
+    height: 40px; /* Ensures the height is consistent */
+    box-sizing: border-box; /* Includes padding in the total width/height */
+  }
+  
+  .input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .input-group input {
+    padding-right: 40px; /* Extra space for the eye icon inside */
+  }
+  
+  .eye-icon {
+    cursor: pointer;
+    position: absolute;
+    right: 10px; /* Adjusted position of the eye icon inside the input box */
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+  }
+  
+  .forgot-password {
+    text-align: right;
+    font-size: 0.9rem;
+  }
+  
+  .bottom-text {
+    text-align: center;
+    margin-top: 1rem;
+  }
+  
+  .bottom-text a {
+    color: var(--primary-color);
+    font-weight: bold;
+  }
+  

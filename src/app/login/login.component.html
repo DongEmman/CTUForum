@@ -1,0 +1,39 @@
+<div class="auth-container">
+    <div class="auth-box">
+      <div class="logo">
+        <img src="assets/ctu-logo.png" alt="CTU Logo" />
+      </div>
+      <h2>Welcome Back</h2>
+  
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <label>Email</label>
+        <input formControlName="email" class="email-input" type="email" placeholder="Enter your email" />
+        <div *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid" class="error">
+          Valid email is required.
+        </div>
+  
+        <label>Password</label>
+        <div class="input-group">
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            formControlName="password"
+            placeholder="Enter your password" />
+          <span class="eye-icon" (click)="togglePasswordVisibility()">👁️</span>
+        </div>
+        <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid" class="error">
+          Password is required.
+        </div>
+  
+        <div class="forgot-password">
+          <a href="#">Forgot password? click here</a>
+        </div>
+  
+        <button class="primary" type="submit">Sign In</button>
+  
+        <p class="bottom-text">
+          Don't have an account yet? <a routerLink="/signup">Sign up here</a>
+        </p>
+      </form>
+    </div>
+  </div>
+  
