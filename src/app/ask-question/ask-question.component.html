@@ -1,0 +1,22 @@
+<!-- Background Layers -->
+<div class="bg"></div>
+<div class="bg bg2"></div>
+<div class="bg bg3"></div>
+
+<div class="ask-question-container">
+  <div class="ask-form-box">
+    <h2>Ask a Question</h2>
+    <form (ngSubmit)="onSubmit()">
+      <label for="title">Title</label>
+      <input id="title" name="title" type="text" [(ngModel)]="postData.title" required />
+
+      <label for="content">Content</label>
+      <textarea id="content" name="content" [(ngModel)]="postData.content" required></textarea>
+
+      <label for="tagsInput">Tags (comma-separated)</label>
+      <input id="tagsInput" name="tagsInput" type="text" [(ngModel)]="postData.tagsInput" />
+
+      <button type="submit">Post Question</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+
+<div class="ask-question-container">
+  <div class="ask-form-box">
+    <h2>Edit Profile</h2>
+    <label>Name</label>
+    <input type="text" [(ngModel)]="name" />
+
+    <label>Email</label>
+    <input type="email" [(ngModel)]="email" />
+
+    <label>Profile Picture</label>
+    <input type="file" (change)="onFileChange($event)" />
+
+    <div style="margin-top: 10px;">
+      <img [src]="imageUrl" alt="Preview" width="80" height="80" style="border-radius: 50%;" />
+    </div>
+
+    <button class="primary" (click)="saveProfile()">Save Changes</button>
+  </div>
+</div>

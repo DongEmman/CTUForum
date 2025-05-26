@@ -1,0 +1,102 @@
+/* Animated Background */
+.bg {
+  animation: slide 3s ease-in-out infinite alternate;
+  background-image: linear-gradient(-60deg, rgb(231, 27, 13) 50%, rgb(253, 207, 2) 50%);
+  bottom: 0;
+  left: -50%;
+  opacity: 0.5;
+  position: fixed;
+  right: -50%;
+  top: 0;
+  z-index: -1;
+}
+
+.bg2 {
+  animation-direction: alternate-reverse;
+  animation-duration: 4s;
+}
+
+.bg3 {
+  animation-duration: 5s;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(-25%);
+  }
+  100% {
+    transform: translateX(25%);
+  }
+}
+
+.ask-question-container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px; /* space for smaller screens */
+  overflow: auto; /* enables scroll if form overflows */
+  box-sizing: border-box;
+  background-color: transparent; /* ensure background layers are visible */
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+
+.ask-form-box {
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  padding: 30px;
+  width: 100%;
+  max-width: 700px;
+}
+
+.ask-form-box h2 {
+  font-size: 22px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+.ask-form-box label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+  margin-top: 15px;
+  display: block;
+}
+
+.ask-form-box input,
+.ask-form-box textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-top: 6px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.ask-form-box textarea {
+  height: 120px;
+  resize: vertical;
+}
+
+.ask-form-box button {
+  margin-top: 20px;
+  background-color: #ff8000;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.ask-form-box button:hover {
+  background-color: #e67300;
+}

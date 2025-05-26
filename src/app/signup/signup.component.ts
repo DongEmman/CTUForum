@@ -40,12 +40,35 @@ export class SignupComponent {
     return pass === confirmPass ? null : { passwordsMismatch: true };
   }
 
-  onSubmit() {
-    if (this.signupForm.valid) {
-      console.log('Signup data:', this.signupForm.value);
-      this.router.navigate(['/home']);
-    } else {
-      this.signupForm.markAllAsTouched();
-    }
+onSubmit() {
+  if (this.signupForm.invalid) {
+    this.signupForm.markAllAsTouched(); // Optionally show validation errors
+    alert('Please fill out all required fields correctly.');
+    return;
   }
+
+  const users = JSON.parse(localStorage.getItem('users') || '[]');
+
+  const newUser = {
+    email: this.signupForm.value.email.trim().toLowerCase(),
+    fullName: this.signupForm.value.fullName,
+    password: this.signupForm.value.password,
+    profilePicUrl: 'assets/anonymous.png',
+    likedPosts: [],
+    likedComments: [],
+    role: this.signupForm.value.email === 'admin@ctu.edu' ? 'admin' : 'user'
+  };
+
+  const existing = users.find((u: any) => u.email === newUser.email);
+  if (existing) {
+    alert('User already exists!');
+    return;
+  }
+
+  users.push(newUser);
+  localStorage.setItem('users', JSON.stringify(users));
+  alert('Account created! You can now log in.');
+  this.router.navigate(['/login']);
+}
+
 }

@@ -2,164 +2,275 @@
   <header class="top-bar">
     <div class="logo-section">
       <img src="assets/ctu-logo.png" alt="CTU-DB Logo">
-      <span class="logo-text">CTU-DB Student Forum</span>
+      <span class="logo-text" routerLink="/about" style="cursor: pointer;">
+       
+        CTU-DB Student Forum
+      </span>
     </div>
     <div class="header-actions">
-      <button class="ask-question-btn">Ask a Question</button>
-      <button class="notification-btn">
-        <img src="assets/bell.png" alt="Notifications">
-      </button>
-      <div class="user-profile">
-        <img src="assets/emman.jpg" alt="User Profile">
+      <button class="ask-question-btn" routerLink="/ask">Ask a Question</button>
+
+      <div class="user-profile" routerLink="/profile">
+        <img [src]="profilePicUrl" alt="User Profile">
         <span class="dropdown-arrow">▼</span>
       </div>
+      <button class="logout-btn" routerLink="/logout">
+        <i class="fas fa-sign-out-alt"></i>
+      </button>
     </div>
   </header>
 
   <div class="main-content">
     <aside class="sidebar">
-      <!-- Search -->
       <div class="sidebar-search-container">
-        <input type="text" placeholder="Search..." class="sidebar-search" />
+        <input
+          type="text"
+          placeholder="Search..."
+          class="sidebar-search"
+          [(ngModel)]="searchTerm"
+        />
       </div>
 
-      <!-- Menu Section -->
       <div class="sidebar-section">
         <div class="sidebar-title">Menu</div>
         <ul class="sidebar-list">
-          <li class="sidebar-item active">Questions</li>
-          <li class="sidebar-item">Tags</li>
-          <li class="sidebar-item">Ranking</li>
+          <li class="sidebar-item" [class.active]="currentView === 'questions'" (click)="setView('questions')">Questions</li>
+          <li class="sidebar-item" [class.active]="currentView === 'tags'" (click)="setView('tags')">Tags</li>
+          <li class="sidebar-item" [class.active]="currentView === 'ranking'" (click)="setView('ranking')">Ranking</li>
         </ul>
       </div>
 
-      <!-- Personal Navigator Section -->
       <div class="sidebar-section">
         <div class="sidebar-title">Personal Navigator</div>
         <ul class="sidebar-list">
-          <li class="sidebar-item">Your Questions</li>
-          <li class="sidebar-item">Your Answers</li>
-          <li class="sidebar-item">Your Likes & Votes</li>
+          <li class="sidebar-item" [class.active]="currentView === 'myQuestions'" (click)="setView('myQuestions')">Your Questions</li>
+          <li class="sidebar-item" [class.active]="currentView === 'myAnswers'" (click)="setView('myAnswers')">Your Answers</li>
+          <li class="sidebar-item" [class.active]="currentView === 'myLikes'" (click)="setView('myLikes')">Your Likes & Votes</li>
         </ul>
       </div>
 
-      <!-- Social Links -->
       <div class="sidebar-social">
-        <img src="assets/instagram.jpg" alt="Instagram" />
-        <img src="assets/facebook.webp" alt="Facebook" />
-        <img src="assets/twitter.png" alt="Twitter" />
+        <a href="#" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social-icon twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
       </div>
     </aside>
 
-    <!-- Feed -->
+    <!-- feed -->
     <section class="discussion-feed">
       <div class="tabs">
-        <button class="tab active" data-tab="new">🆕 New</button>
-        <button class="tab" data-tab="top">🔝 Top</button>
-        <button class="tab" data-tab="hot">🔥 Hot</button>
-        <button class="tab" data-tab="closed">🚫 Closed</button>
+        <button class="tab" (click)="setView('mostCommented')">
+          <i class="fas fa-comments"></i> Most Commented
+        </button>
+        <button class="tab" (click)="setView('mostViewedToday')">
+          <i class="fas fa-eye"></i> Most Viewed Today
+        </button>
+        <button class="tab" (click)="setView('unanswered')">
+          <i class="fas fa-question-circle"></i> Unanswered
+        </button>
       </div>
-      
 
-      <!-- Post -->
-      <div class="post">
-        <div class="post-header">
-          <img src="assets/emman.jpg" alt="User" class="avatar">
-          <div class="post-user-info">
-            <span class="username">Emmanuel Philip Godin</span>
-            <span class="post-time">5 min ago</span>
-          </div>
-          <button class="post-menu">⋮</button>
-        </div>
-
-        <div class="post-content">
-          <h4>Best Resources for learning Angular in 2025</h4>
-          <p>Are there any good courses, books, or Youtube channels that helped you level up your Angular language?</p>
-          <div class="tags">
-            <br>
-            <span>Angular</span><span>Nodejs</span><span>Programming Frameworks</span>
-          </div>
-        </div>
-
-        <div class="post-actions">
-          <button class="action-btn">
-            <img src="assets/eye.png" alt="Views"> 125
-          </button>
-          <button class="action-btn">
-            <img src="assets/comment.png" alt="Comments"> 15
-          </button>
-          <button class="action-btn">
-            <img src="assets/upvote.png" alt="Upvotes"> 155
-          </button>
+      <!-- Most Commented -->
+      <div *ngIf="currentView === 'mostCommented'">
+        <div *ngFor="let post of getMostCommentedPosts()" class="post">
+          <ng-container *ngTemplateOutlet="postTemplate; context: { $implicit: post }"></ng-container>
         </div>
       </div>
 
-      <div class="post">
-        <div class="post-header">
-          <img src="assets/ninya.jpg" alt="User" class="avatar">
-          <div class="post-user-info">
-            <span class="username">Nina Pamela Godin</span>
-            <span class="post-time">5 hrs ago</span>
-          </div>
-          <button class="post-menu">⋮</button>
-        </div>
-
-        <div class="post-content">
-          <h4>Campus Food Recommendation</h4>
-          <p>Any recommendations for affordable food options near the COTE building? Bonus points for vegetarian-friendly places!</p>
-          <div class="tags">
-            <br>
-            <span>Foods</span><span>CTU</span><span>Need Help</span>
-          </div>
-        </div>
-
-        <div class="post-actions">
-          <button class="action-btn">
-            <img src="assets/eye.png" alt="Views"> 88
-          </button>
-          <button class="action-btn">
-            <img src="assets/comment.png" alt="Comments"> 21
-          </button>
-          <button class="action-btn">
-            <img src="assets/upvote.png" alt="Upvotes"> 45
-          </button>
+      <!-- Most Viewed Today -->
+      <div *ngIf="currentView === 'mostViewedToday'">
+        <div *ngFor="let post of getMostViewedTodayPosts()" class="post">
+          <ng-container *ngTemplateOutlet="postTemplate; context: { $implicit: post }"></ng-container>
         </div>
       </div>
 
-      <div class="post">
-        <div class="post-header">
-          <img src="assets/chan.jpg" alt="User" class="avatar">
-          <div class="post-user-info">
-            <span class="username">Christian Calderon</span>
-            <span class="post-time">2 days ago</span>
-          </div>
-          <button class="post-menu">⋮</button>
+    <!-- Unanswered Questions -->
+    <div *ngIf="currentView === 'unanswered'">
+      <h3>Unanswered Questions</h3><br>
+      <div *ngFor="let post of getUnansweredQuestions()" class="post">
+        <ng-container *ngTemplateOutlet="postTemplate; context: { $implicit: post }"></ng-container>
+      </div>
+    </div>
+
+
+      <!-- QUESTIONS VIEW -->
+      <div *ngIf="currentView === 'questions'">
+        <div *ngIf="selectedTag" class="filter-notice">
+          Showing posts tagged with: <strong>{{ selectedTag }}</strong>
+          <button (click)="clearTagFilter()">Clear</button>
+          
         </div>
 
-        <div class="post-content">
-          <h4>How to prepare for midterm exam effectively?</h4>
-          <p>Does anyone have tips on creating a study schedule that works and effective?</p>
-          <div class="tags">
-            <br>
-            <span>Exam</span><span>Focus</span><span>Good grades</span>
-          </div>
+        <div *ngIf="getFilteredPosts().length === 0" class="no-posts">
+          <p>No posts found for <strong>{{ selectedTag }}</strong>.</p>
         </div>
 
-        <div class="post-actions">
-          <button class="action-btn">
-            <img src="assets/eye.png" alt="Views"> 523
-          </button>
-          <button class="action-btn">
-            <img src="assets/comment.png" alt="Comments"> 175
-          </button>
-          <button class="action-btn">
-            <img src="assets/upvote.png" alt="Upvotes"> 385
-          </button>
+        <div *ngFor="let post of getFilteredPosts()" class="post">
+          <ng-container *ngTemplateOutlet="postTemplate; context: { $implicit: post }"></ng-container>
         </div>
       </div>
 
-      <!-- More posts... (repeat like above) -->
+      <!-- TAGS VIEW -->
+      <div *ngIf="currentView === 'tags'" class="tag-view">
+        <h3>All Tags</h3><br>
+        <div *ngIf="posts.length === 0" class="no-posts-message">
+          <p>No tags available yet. Create a post to add tags!</p>
+        </div>
+         <div *ngIf="posts.length > 0" class="tag-grid">
+          <span *ngFor="let post of posts" class="tag-row">
+            <span *ngFor="let tag of post.tags" class="tag-item" (click)="filterByTag(tag)">#{{ tag }}</span>
+          </span>
+        </div>
+      </div>
 
+      <!-- RANKING VIEW -->
+      <div *ngIf="currentView === 'ranking'">
+        <h3>Top Liked Posts</h3><br>
+
+        <div *ngIf="sortedByLikes().length === 0" class="no-posts-message">
+          <p>No posts have been liked yet. Be the first to like a post!</p>
+        </div>
+
+        <div *ngFor="let post of sortedByLikes()" class="post">
+          <ng-container *ngTemplateOutlet="postTemplate; context: { $implicit: post }"></ng-container>
+        </div>
+      </div>
+
+
+      <!-- MY QUESTIONS VIEW -->
+      <div *ngIf="currentView === 'myQuestions'">
+        <h3>Your Questions</h3><br>
+         <div *ngIf="getMyQuestions().length === 0" class="no-data">
+          You haven't posted any questions yet.
+        </div>
+        <div *ngFor="let post of getMyQuestions()" class="post">
+          <ng-container *ngTemplateOutlet="postTemplate; context: { $implicit: post }"></ng-container>
+        </div>
+      </div>
+
+      <!-- MY ANSWERS VIEW -->
+      <div *ngIf="currentView === 'myAnswers'">
+        <h3>Your Answers</h3><br>
+          <div *ngIf="getMyAnswers().length === 0" class="no-data">
+            You haven't answered any posts yet.
+          </div>
+        <div *ngFor="let post of getMyAnswers()" class="post">
+          <ng-container *ngTemplateOutlet="postTemplate; context: { $implicit: post }"></ng-container>
+        </div>
+      </div>
+
+      <!-- MY LIKES VIEW -->
+      <div *ngIf="currentView === 'myLikes'">
+        <h3>Posts You've Liked</h3><br>
+          <div *ngIf="getMyLikedPosts().length === 0" class="no-data">
+            You haven't liked any posts yet.
+          </div>
+        <div *ngFor="let post of getMyLikedPosts()" class="post">
+          <ng-container *ngTemplateOutlet="postTemplate; context: { $implicit: post }"></ng-container>
+        </div>
+
+        <h3 style="margin-top: 40px;">Comments You've Liked</h3><br>
+          <div *ngIf="getMyLikedComments().length === 0" class="no-data">
+            You haven't liked any comments yet.
+          </div>
+        <div *ngFor="let item of getMyLikedComments()" class="comment-item">
+          <img [src]="item.comment.profilePicUrl || 'assets/anonymous.png'" class="comment-avatar" />
+          <div class="comment-body">
+            <div class="comment-header">
+              <span class="comment-author">{{ item.comment.author }}</span>
+              <span class="comment-time">{{ item.comment.timestamp | date:'short' }}</span>
+            </div>
+            <div class="comment-text">{{ item.comment.text }}</div>
+            <div class="comment-meta">In post: <strong>{{ item.postTitle }}</strong></div>
+          </div>
+        </div>
+      </div>
     </section>
   </div>
 </div>
+
+<!-- ✅ Shared Post Template -->
+<ng-template #postTemplate let-post>
+  <div class="post-header">
+    <img [src]="post.profilePicUrl || 'assets/anonymous.png'" class="avatar" />
+    <div class="post-user-info">
+      <span class="username">{{ post.author }}</span>
+      <span class="post-time">{{ post.timestamp | date:'short' }}</span>
+    </div>
+    <button class="post-menu" (click)="deletePost(post.id)">⋮</button>
+  </div>
+
+  <div class="post-content">
+    <span class="announcement-label" *ngIf="post.isAnnouncement">📢 Announcement</span>
+    <span class="userpost-label" *ngIf="!post.isAnnouncement">📝 Post</span>
+    <h4><br>{{ post.title }}
+    </h4>
+    <p>{{ post.content }}</p>
+    <div class="tags">
+      <span *ngFor="let tag of post.tags" (click)="filterByTag(tag)">
+        {{ tag }}
+      </span>
+    </div>
+  </div>
+
+  <div class="post-actions">
+    <button class="action-btn" (click)="onUpvote(post.id); $event.stopPropagation()">
+      <i class="fas fa-thumbs-up"></i> {{ post.upvotes || 0 }}
+    </button>
+    <button class="action-btn" (click)="toggleComments(post.id); $event.stopPropagation()">
+      <i class="fas fa-comment"></i> {{ post.comments?.length || 0 }}
+    </button>
+    <button class="action-btn" (click)="onView(post.id); $event.stopPropagation()">
+      <i class="fas fa-eye"></i> {{ post.views || 0 }}
+    </button>
+    <button class="action-btn" disabled>
+      <i class="fas fa-reply"></i> {{ getReplyCount(post.id) }}
+    </button>
+  </div>
+
+  <div *ngIf="showComments[post.id]" class="comments-section">
+    <ul>
+      <li *ngFor="let comment of post.comments; let ci = index">
+        <div class="comment-item">
+          <img [src]="comment.profilePicUrl || 'assets/anonymous.png'" class="comment-avatar" />
+          <div class="comment-body">
+            <div class="comment-header">
+              <span class="comment-author">{{ comment.author }}</span>
+              <span class="comment-time">{{ comment.timestamp | date:'short' }}</span>
+            </div>
+            <div class="comment-text">{{ comment.text }}</div>
+            <div class="comment-actions">
+              <button (click)="likeComment(post.id, ci)">
+                <i class="fas fa-thumbs-up"></i> {{ comment.likes || 0 }}
+              </button>
+              <button (click)="toggleReplies(post.id, ci)">
+                <i class="fas fa-reply"></i> Reply
+              </button>
+            </div>
+
+            <ul *ngIf="showReplies[post.id + '_' + ci]" class="reply-list">
+              <li *ngFor="let reply of comment.replies">
+                <img [src]="reply.profilePicUrl || 'assets/anonymous.png'" class="reply-avatar" />
+                <div>
+                  <strong>{{ reply.author }}</strong>
+                  <small>{{ reply.timestamp | date:'short' }}</small>
+                  <p>{{ reply.text }}</p>
+                </div>
+              </li>
+            </ul>
+
+            <div *ngIf="showReplies[post.id + '_' + ci]" class="reply-input">
+              <input [(ngModel)]="commentReplyInputs[post.id + '_' + ci]" placeholder="Write a reply..." />
+              <button (click)="replyToComment(post.id, ci)">Post</button>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+    <div class="new-comment">
+      <input [(ngModel)]="newComments[post.id]" placeholder="Write a comment..." type="text" />
+      <button (click)="addComment(post.id, newComments[post.id])">Post</button>
+    </div>
+  </div>
+</ng-template>

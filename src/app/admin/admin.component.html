@@ -1,0 +1,150 @@
+<div class="bg"></div>
+<div class="bg bg2"></div>
+<div class="bg bg3"></div>
+
+<div class="admin-dashboard">
+ 
+  <!-- Navigation Sidebar -->
+  <nav class="sidebar" aria-label="Admin dashboard navigation">
+  <h2 class="dashboard-title">Admin Dashboard</h2>
+    <ul class="nav-links">
+      <li><a href="#" (click)="scrollToFragment('platform-stats', $event)">📊 Platform Stats</a></li>
+      <li><a href="#" (click)="scrollToFragment('admin-management', $event)">🛡️ Admin Management</a></li>
+      <li><a href="#" (click)="scrollToFragment('user-management', $event)">👥 Users</a></li>
+      <li><a href="#" (click)="scrollToFragment('post-management', $event)">📢 Create Announcement Post</a></li>
+      <li><a href="#" (click)="scrollToFragment('all-posts', $event)">🗂️ All Posts</a></li>
+    </ul>
+      <button class="logout-btn" (click)="logout()">🚪 Logout</button>
+  </nav>
+
+
+  <!-- Main Content -->
+  <main class="main-content">
+
+    <!-- Platform Statistics -->
+    <section id="platform-stats" class="card">
+      <h3>📊 Platform Stats</h3>
+      <table class="stats-table">
+        <tbody>
+          <tr>
+            <td><strong>Total Users:</strong></td>
+            <td>{{ stats.totalUsers }}</td>
+          </tr>
+          <tr>
+            <td><strong>Total Admins:</strong></td>
+            <td>{{ stats.totalAdmins }}</td>
+          </tr>
+          <tr>
+            <td><strong>Total Posts:</strong></td>
+            <td>{{ stats.totalPosts }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Admin Management -->
+    <section id="admin-management" class="card">
+      <h3>🛡️ Admin Management</h3>
+      <form (ngSubmit)="createAdmin()" #adminForm="ngForm" class="form-grid">
+        <input type="text" placeholder="Full Name" [(ngModel)]="newAdmin.fullName" name="fullName" required>
+        <input type="email" placeholder="Email" [(ngModel)]="newAdmin.email" name="email" required>
+        <input type="password" placeholder="Password" [(ngModel)]="newAdmin.password" name="password" required>
+        <button type="submit" class="add-admin-btn">➕ Add Admin</button>
+      </form>
+
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let admin of admins">
+            <td>{{ admin.fullName }}</td>
+            <td class="truncate-email">{{ admin.email }}</td>
+
+            <td>
+              <button class="danger" (click)="deleteUser(admin)">❌ Remove</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- User Management -->
+    <section id="user-management" class="card">
+      <h3>👥 Users</h3>
+      <table class="user-table">
+        <thead>
+          <tr>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td>{{ user.fullName }}</td>
+            <td class="truncate-email">{{ user.email }}</td>
+            <td>{{ user.role }}</td>
+            <td>
+              <button *ngIf="user.role !== 'admin'" class="action-btn" (click)="promoteToAdmin(user)">Promote</button>
+              <button *ngIf="user.role !== 'admin'" class="danger" (click)="deleteUser(user)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Post Management -->
+    <section id="post-management" class="card">
+      <h3>📢 Create Announcement Post</h3>
+      <form (ngSubmit)="addPost()" #postForm="ngForm" class="form-grid">
+        <input type="text" name="title" [(ngModel)]="newPost.title" placeholder="Post Title" required />
+        <textarea name="content" [(ngModel)]="newPost.content" placeholder="Post Content" rows="4" required></textarea>
+        <input type="text" name="tags" [(ngModel)]="newPost.tagsInput" placeholder="Tags (comma-separated)" />
+        <button type="submit" class="Publish-btn">📤 Publish Post</button>
+      </form>
+    </section>
+
+    <!-- All Posts Record -->
+    <section id="all-posts" class="card">
+      <h3>🗂️ All Posts</h3>
+      <table class="posts-table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Content</th>
+            <th>Tags</th>
+            <th>Timestamp</th>
+            <th>Type</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let post of posts">
+            <td>{{ post.title }}</td>
+            <td>{{ post.author }}</td>
+            <td>{{ post.content }}</td>
+            <td>
+              <span *ngFor="let tag of post.tags" class="tag">#{{ tag }} </span>
+            </td>
+            <td>{{ post.timestamp | date:'medium' }}</td>
+            <td>
+              <span *ngIf="post.isAnnouncement" class="announcement-label">📢 Announcement</span>
+              <span *ngIf="!post.isAnnouncement" class="userpost-label">📝 Post</span>
+            </td>
+            <td>
+              <button class="danger" (click)="deletePost(post.id)">🗑️ Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+</div>

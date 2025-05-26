@@ -8,6 +8,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
   imports: [RouterModule,ReactiveFormsModule,FormsModule],
   template: `
     <router-outlet></router-outlet>
+    
   `,
   styleUrls: ['./app.component.css'],
 })
